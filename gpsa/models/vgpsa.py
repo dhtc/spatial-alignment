@@ -72,7 +72,7 @@ class VariationalGPSA(GPSA):
                 curr_X_spatial = torch.cat(curr_X_spatial_list, dim=0)
 
                 kmeans = KMeans(n_clusters=self.m_X_per_view)
-                kmeans.fit(curr_X_spatial.detach().numpy())
+                kmeans.fit(curr_X_spatial.cpu().numpy())
                 Xtilde[ii, :, :] = torch.tensor(kmeans.cluster_centers_)
 
             self.Xtilde = nn.Parameter(Xtilde.clone())
